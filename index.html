@@ -1,54 +1,408 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
-      <link rel="stylesheet" href="https://github.com/iqbalmutaqin12/babal/blob/main/css/style1.css">
-    
-</head>
-    
-<body>
-    <div class ="container" id="waktu">
-        <!-- Mencari Lokasi -->
-        <div class="weather" id="weather">   
-            <input type="search" name="search" id="searchCity" placeholder="Cari lokasi...">
-            <span class="material-icons" onclick="search1()" id="search">
-                search
-                </span>
-        </div>
-        <!-- Menampilkan Hasil Pencarian -->
-        <div class="weather" id="weather" >
-
-            <div class="col-1 lokasi">
-                <h1 class="tempat"></h1>
-            </div>
-
-            <div class="col-2">
-                <img class="icon">
-                <p class="kondisi-awan">/p>
-            </div>
-
-            <div class="col-3">
-                <p class="derajat"><p>   
-                <p class="kelembapan"></p>
-                <p class="kecepatan-angin"></p>
-            </div>
-
-           
-        </div>
-
-        
-
-        </div>
-
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
         
         
+    </head>
 
-    </div>
-     <script src="https://github.com/iqbalmutaqin12/babal/blob/main/js/script.js"></script>
-</body>
-</html>
+    <style>
+            *{
+            margin: 0px;
+            padding: 0px;
+            
+        }
+
+        .container{ 
+            /* color: #032638; */
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            flex-direction: column;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            
+            
+        }
+
+        .pagi{
+            background-position: center ;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('/src/morning.jpg');
+            
+        }
+
+        .siang{
+            background-position: center ;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('/src/afternoon.jpg');
+
+        }
+
+        .malam{
+            background-position: center ;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('/src/night2.jpg');
+            
+        }
+
+        .display-pagi{    
+            color: #07332e;
+            text-align: center;
+            border-radius: 20px;    
+            width: 70%; 
+            background-color: rgba(172, 129, 76,0.8);
+            margin-top: 10px;
+
+        }
+        .display-pagi:nth-child(1){
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            padding-right: 8px;
+            
+
+            
+        }
+        .display-pagi:nth-child(1):hover{    
+            box-shadow: 1px 1px 1px #B07C44;
+        
+        } 
+        .display-pagi:nth-child(1) input[type="search"]{
+            color: #07332e;
+            outline: none;
+            font-size: 15px;    
+            border-radius: 20px; 
+            height: 100%;
+            text-align: center;
+            width: 100%;
+            border:none;
+            background-color: transparent;
+            
+        }
+
+        /* Display Siang */
+        .display-siang{    
+            color: #0F2025;
+            text-align: center;
+            border-radius: 20px;    
+            width: 70%; 
+            background-color: rgba(201, 186, 155,0.8);
+            margin-top: 10px;
+
+        }
+        .display-siang:nth-child(1){
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            padding-right: 8px;
+            
+
+            
+        }
+        .display-siang:nth-child(1):hover{    
+            box-shadow: 3px 2px 2px #594B32,1px 2px 2px #594B32;
+        
+        }
+
+        span{
+            padding-top: 7px;
+            cursor: pointer;
+            float: right;
+            font-size: 12px;
+        }
+        span::after{
+            content: ' ';
+            clear: both;
+        }
+
+        span:hover{
+            color: #858282;
+        }
+
+
+        .display-siang:nth-child(1) input[type="search"]{
+            color: #0F2025;;
+            outline: none;
+            font-size: 15px;    
+            border-radius: 20px; 
+            height: 100%;
+            text-align: center;
+            width: 100%;
+            border:none;
+            background-color: transparent;
+            
+        }
+
+        /* Display Malam */ 
+        .display-malam{    
+            color: #0F2025;
+            text-align: center;
+            border-radius: 20px;    
+            width: 70%; 
+            background-color: rgba(195, 210, 226,0.6);
+            margin-top: 10px;
+
+        }
+        .display-malam:nth-child(1){
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            padding-right: 8px;
+            
+
+            
+        }
+        .display-malam:nth-child(1):hover{    
+            box-shadow: 1px 1px 3px #a4a8aa;
+        
+        } 
+        .display-malam:nth-child(1) input[type="search"]{
+            color: #0F2025;;
+            outline: none;
+            font-size: 15px;    
+            border-radius: 20px; 
+            height: 100%;
+            text-align: center;
+            width: 100%;
+            border:none;
+            background-color: transparent;
+            
+        }
+
+
+
+        .lokasi{
+            margin-top: 10px;
+            text-align: center;
+            
+        }
+
+        .col-2{
+            transform: translate(-50%,-23%);
+            float: right;
+        }
+
+        .col-2 .kondisi-awan{
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+        .col-3{
+            font-weight: 700;
+            float: left;
+            transform: translate(35%,14%);
+        }
+
+        img{
+            width: 80px;
+            height: 80px;
+            
+        }
+
+        @media only screen and (max-width:600px){
+            .lokasi{
+                font-size: 10px;
+            }
+
+            img{ 
+                
+                width: 70px;
+                height: 70px;
+            } 
+
+            .col-2{
+                transform: none;
+                float: none;
+                margin-bottom: 40px;
+            }
+
+            .col-2 .kondisi-awan{
+                font-size: 15px;
+                text-transform: capitalize;
+            }
+
+            .col-3{
+                
+                margin-bottom: 50px;
+                font-size: 15px;
+                text-align: center;
+                float: none;
+                transform: none;
+            }
+
+            
+
+
+            
+            
+        }
+    </style>
+    <body>
+        <div class ="container" id="waktu">
+            <!-- Mencari Lokasi -->
+            <div class="weather" id="weather">   
+                <input type="search" name="search" id="searchCity" placeholder="Cari lokasi...">
+                <span class="material-icons" onclick="search1()" id="search">
+                    search
+                    </span>
+            </div>
+            <!-- Menampilkan Hasil Pencarian -->
+            <div class="weather" id="weather" >
+
+                <div class="col-1 lokasi">
+                    <h1 class="tempat"></h1>
+                </div>
+
+                <div class="col-2">
+                    <img class="icon">
+                    <p class="kondisi-awan">/p>
+                </div>
+
+                <div class="col-3">
+                    <p class="derajat"><p>   
+                    <p class="kelembapan"></p>
+                    <p class="kecepatan-angin"></p>
+                </div>
+
+            
+            </div>
+
+            
+
+            </div>
+
+            
+            
+
+        </div>
+
+        <script src=""></script>
+
+        <script>
+            window.addEventListener('load', ()=>{
+        var long;
+        var lat;
+
+            // Menggunakan Geolocation
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(letak =>{
+                    long = letak.coords.longitude;
+                    lat = letak.coords.latitude;
+                    console.log(long,lat);
+                    let weatherApi = {
+                    "api": "2e20d58821e364bba1afafd5482021ca",
+                        
+                fetchCuaca: function(){
+                    fetch(
+                            "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long + "&units=metric&lang=id&appid=2e20d58821e364bba1afafd5482021ca"
+                            ).then((response) => response.json())
+                            .then((data) => this.displayCuaca(data));
+                
+                    },
+                    
+                    // Menggunakan search
+                    fetchCuaca1: function(tempat){
+                        fetch(
+                            "https://api.openweathermap.org/data/2.5/weather?q=" + tempat + "&units=metric&lang=id&appid=2e20d58821e364bba1afafd5482021ca"
+                            ).then((response) => response.json())
+                            .then((data) => this.displayCuaca(data));
+                
+                    },
+                    displayCuaca: function(data){
+                        // Mengambil data cuaca
+                        const { name } = data;
+                        const { main, description, icon } = data.weather[0];
+                        const { temp, humidity } = data.main;
+                        const { speed } = data.wind;
+                        
+                        // Menampilkan data cuaca
+                        document.querySelector(".tempat").textContent = name;
+                        document.querySelector(".derajat").textContent = "Suhu : " +  Math.floor(temp) + "°C" ;
+                        document.querySelector(".kelembapan").textContent = "Kelembapan : " + humidity + "%";
+                        document.querySelector(".kecepatan-angin").textContent = "Angin : " + speed + " km/h";
+                        document.querySelector(".kondisi-awan").textContent = description; 
+                        document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                        
+                        
+                    },
+                    
+                    search: function(){
+                        
+                        this.fetchCuaca1(document.querySelector("#searchCity").value);
+                    },
+                
+                
+                }   
+                
+                
+                document.querySelector("#searchCity").addEventListener("keyup",function(event) {
+                    if(event.key == "Enter"){
+                        weatherApi.search();
+                    }
+                
+                    
+                });
+                
+            document.querySelector("#search").addEventListener("click", function(){
+                    weatherApi.search();
+            });
+                weatherApi.fetchCuaca();
+            
+                
+                })
+            }
+        });
+        
+    function gantiBg(){
+            let jam = new Date().getHours();
+            let bg1 = document.querySelectorAll("#weather");
+            let bg = document.querySelector("#waktu");
+            
+            
+            // Pagi
+            if(jam < 12){
+                bg.classList.add("pagi");
+                for(var i = 0;i <= bg1.length;i++){
+                    bg1[i].classList.add("display-pagi")
+                    
+                }
+            }
+            
+            // siang
+            else if(jam >= 12 && jam < 17){
+                bg.classList.add("siang");
+                
+                
+                for(var i = 0;i <= bg1.length;i++){
+                    bg1[i].classList.add("display-siang")
+                    
+                }
+                
+            }
+            
+            // Malam
+            else if(jam >= 17 && jam <= 24){
+                bg.classList.add("malam");
+                
+                for(var i = 0;i <= bg1.length;i++){
+                    bg1[i].classList.add("display-malam")
+                    
+
+        
+                }
+            }
+
+
+
+        }
+
+        gantiBg();
+
+        </script>
+    </body>
+    </html>
